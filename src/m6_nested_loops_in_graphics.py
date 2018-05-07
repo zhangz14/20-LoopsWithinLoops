@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Zikang Zhang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -80,9 +80,27 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    for i in range(r):
+        row_circle = circle.clone()
+        for j in range(3):
+            draw_circle = row_circle.clone()
+            draw_circle.fill_color = circle.fill_color
+            draw_circle.attach_to(window)
+            window.render(0.1)
+            row_circle.center.x = row_circle.center.x + row_circle.radius * 2
+        circle.center.y = circle.center.y + circle.radius * 2
+    for k in range(c + 3):
+        square_circle = circle.clone()
+        for j in range(3):
+            draw_circle = square_circle.clone()
+            draw_circle.fill_color = circle.fill_color
+            draw_circle.attach_to(window)
+            window.render(0.1)
+            square_circle.center.y = square_circle.center.y + square_circle.radius * 2
+        circle.center.x = circle.center.x + circle.radius * 2
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +139,17 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    for i in range(1, n + 1):
+        row_rec = rectangle.clone()
+        for j in range(i):
+            draw_rec = row_rec.clone()
+            draw_rec.attach_to(window)
+            window.render(0.1)
+            row_rec.move_by(-row_rec.get_width(), 0)
+        rectangle.move_by(0, rectangle.get_height())
 
 
 # ----------------------------------------------------------------------
